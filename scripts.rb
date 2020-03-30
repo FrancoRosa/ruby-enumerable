@@ -28,7 +28,7 @@ module Enumerable
   def my_select
     if block_given?
       result = []
-      each do |k|
+      my_each do |k|
         result << k if yield(k) == true
       end
       result
@@ -37,24 +37,26 @@ module Enumerable
     end
   end
 
-  # def my_map(&block)
-  #   result = []
-  #   my_each do |k|
-  #     if k == block.call(k)
-  #       result << k
-  #     end
-  #   end
-  #   result
-  # end
+  def my_map
+    if block_given?
+      result = []
+      my_each do |k|
+        result << yield(k)
+      end
+      result
+    else
+      to_enum
+    end
+  end
 end
 
 a = [2,756,34,68,1]
 puts "#### Embeded: ####"
-puts a.select {|k| k.even?}
+puts a.map {|k| k+22}
 puts "#### Mine: ####"
-puts a.my_select {|k| k.even?}
+puts a.my_map {|k| k+22}
 
 puts "#### Embeded: ####"
 puts a.select
 puts "#### Mine: ####"
-puts a.my_select
+puts a.my_map
