@@ -23,12 +23,15 @@ module Enumerable
     to_enum
   end
 
-  def my_select &block 
-    result = []
-    my_each do |element|
-      result << element if element == block.call(element)
+  def my_select
+    if block_given?
+      result = []
+      each do |k|
+        result << k if yield(k) == true
+      end
+      result
     end
-    result
+    to_enum
   end
 
   # def my_map(&block)
@@ -41,3 +44,14 @@ module Enumerable
   #   result
   # end
 end
+
+a = [2,756,34,68,1]
+puts "#### Embeded: ####"
+puts a.select {|k| k.odd?}
+puts "#### Mine: ####"
+puts a.my_select {|k| k.odd?}
+
+puts "#### Embeded: ####"
+puts a.select
+puts "#### Mine: ####"
+puts a.my_select
