@@ -23,13 +23,13 @@ module Enumerable
     to_enum
   end
 
-  # def my_select &block 
-  #   result = []
-  #   my_each do |element|
-  #     result << element if element == block.call(element)
-  #   end
-  #   result
-  # end
+  def my_select &block 
+    result = []
+    my_each do |element|
+      result << element if element == block.call(element)
+    end
+    result
+  end
 
   # def my_map(&block)
   #   result = []

@@ -3,6 +3,7 @@ require './scripts.rb'
 test_array1 = [11, 2, 3, 56]
 test_array2 = %w[a b c d]
 
+=begin
 # my_each
 p 'my_each'
 test_array1.my_each { |x| p x }
@@ -14,19 +15,19 @@ my_each_output = ''
 block = proc { |num| my_each_output += num.to_s }
 array.my_each(&block)
 p my_each_output # => "1235173457232088781611721258604582254734338510375572677044020668168623615267258207323612837050026152"
-
-=begin
-
 # my_each_with_index
 p 'my_each_with_index'
 test_array1.my_each_with_index { |x, y| p "item: #{x}, index: #{y}" }
-test_array2.my_each_with_index(2) { |x, y| p "item: #{x}, index: #{y}" }
+#test_array2.my_each_with_index(2) { |x, y| p "item: #{x}, index: #{y}" }
 p test_array2.my_each_with_index
+
+=end
 # my_select
 p 'my_select'
 p test_array1.my_select(&:even?)
 p test_array2.my_select { |x| x == 'c' }
 p test_array2.my_select
+=begin
 
 # my_all?
 p 'my_all?'
