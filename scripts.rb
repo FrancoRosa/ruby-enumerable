@@ -40,15 +40,47 @@ module Enumerable
         end
       end
     else
-      puts "### #{arg1}"
-      puts "### #{1.is_a?arg1}"
-      puts "### #{"Cool".is_a?arg1}"
-      my_each do |k|
-        return false if k.is_a?arg1 != true
+      if arg1.is_a?(Regexp)
+        my_each do |k|
+          return false if !(k =~ arg1)
+        end      
+      else
+        my_each do |k|
+          return false if k.is_a?(arg1) != true
+        end
       end
     end
     true
   end
+
+  def my_any?(arg1=nil)
+    if arg1 == nil
+      if block_given?
+        my_each do |k|
+          return true if yield(k) == true
+        end
+      else
+        my_each do |k|
+          return true if k == true
+        end
+      end
+    else
+      if arg1.is_a?(Regexp)
+        my_each do |k|
+          return true if (k =~ arg1)
+        end      
+      else
+        my_each do |k|
+          return true if k.is_a?(arg1) == true
+        end
+      end
+    end
+    false
+  end
+
+  
+
+  
 
   def my_map
     return to_enum unless block_given?
