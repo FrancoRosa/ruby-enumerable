@@ -77,3 +77,23 @@ print '1: '; puts ary.inspect
 print '2: '; puts ary.my_count
 print '3: '; puts ary.my_count(2)
 print '4: '; puts ary.my_count { |x| x%2==0 }
+
+puts '######### inject ############'
+
+print '1: '; puts (5..10).inject { |sum, n| sum + n }            
+print '2: '; puts (5..10).inject(1) { |product, n| product * n }
+# find the longest word
+longest = %w{ cat sheep bear }.inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
+print '3: '; puts longest
+
+puts '######### my_inject ############'
+
+print '1: '; puts (5..10).my_inject { |sum, n| sum + n }            
+print '2: '; puts (5..10).my_inject(1) { |product, n| product * n }
+# find the longest word
+longest = %w{ cat sheep bear }.my_inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
+print '3: '; puts longest

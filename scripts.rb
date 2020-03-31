@@ -43,7 +43,7 @@ module Enumerable
       if arg1.is_a?(Regexp)
         my_each do |k|
           return false if !(k =~ arg1)
-        end      
+        end
       else
         my_each do |k|
           return false if k.is_a?(arg1) != true
@@ -103,7 +103,7 @@ module Enumerable
     true
   end
 
-  def my_count(arg1=nil)
+  def my_count(*arg1)
     count = 0
     if arg1 == nil
       if block_given?
@@ -121,10 +121,6 @@ module Enumerable
     count
   end
 
-  
-
-  
-
   def my_map
     return to_enum unless block_given?
     result = []
@@ -133,5 +129,15 @@ module Enumerable
     end
     result
   end
+
+  def my_inject(*args, &block)
+    mem = 0
+    mem = args[0] if args[0]
+    each do |k|
+      mem = yield(mem, k)
+    end
+    mem
+  end
+
 
 end
