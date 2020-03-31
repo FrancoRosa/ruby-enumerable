@@ -2,61 +2,61 @@
 module Enumerable
 
   def my_each
-    if block_given?
-      i = 0
-      while i < length
-        yield self[i]
-        i = i.next
-      end
-    else
-      to_enum
+    return to_enum unless block_given?
+    i = 0
+    while i < length
+      yield self[i]
+      i = i.next
     end
   end
 
   def my_each_with_index
-    if block_given?
-      i = 0
-      while i < length
-        yield self[i], i
-        i = i.next
-      end
-    else
-      to_enum
+    return to_enum unless block_given?
+    i = 0
+    while i < length
+      yield self[i], i
+      i = i.next
     end
   end
 
   def my_select
-    if block_given?
-      result = []
-      my_each do |k|
-        result << k if yield(k) == true
-      end
-      result
-    else
-      to_enum
+    return to_enum unless block_given?
+    result = []
+    my_each do |k|
+      result << k if yield(k) == true
     end
+    result
+  end
+
+  def my_all?(arg1=nil)
+    if arg1 == nil
+      if block_given?
+        my_each do |k|
+          return false if yield(k) != true
+        end
+      else
+        my_each do |k|
+          return false if k != true
+        end
+      end
+    else
+      puts "### #{arg1}"
+      puts "### #{1.is_a?arg1}"
+      puts "### #{"Cool".is_a?arg1}"
+      my_each do |k|
+        return false if k.is_a?arg1 != true
+      end
+    end
+    true
   end
 
   def my_map
-    if block_given?
-      result = []
-      my_each do |k|
-        result << yield(k)
-      end
-      result
-    else
-      to_enum
+    return to_enum unless block_given?
+    result = []
+    my_each do |k|
+      result << yield(k)
     end
+    result
   end
+
 end
-
-a = [2,756,34,68,1]
-puts "#### Embeded: ####"
-puts a.map {|k| k+22}
-puts "#### Mine: ####"
-puts a.my_map {|k| k+22}
-
-puts "#### Embeded: ####"
-puts a.select
-puts "#### Mine: ####"
-puts a.my_map
