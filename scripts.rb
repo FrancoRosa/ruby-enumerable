@@ -67,8 +67,8 @@ module Enumerable
     else
       if arg1.is_a?(Regexp)
         my_each do |k|
-          return true if (k =~ arg1)
-        end      
+          return true if k =~ arg1
+        end
       else
         my_each do |k|
           return true if k.is_a?(arg1) == true
@@ -76,6 +76,49 @@ module Enumerable
       end
     end
     false
+  end
+
+  def my_none?(arg1=nil)
+    if arg1 == nil
+      if block_given?
+        my_each do |k|
+          return false if yield(k) == true
+        end
+      else
+        my_each do |k|
+          return false if k == true
+        end
+      end
+    else
+      if arg1.is_a?(Regexp)
+        my_each do |k|
+          return false if k =~ arg1
+        end
+      else
+        my_each do |k|
+          return false if k.is_a?(arg1) == true
+        end
+      end
+    end
+    true
+  end
+
+  def my_count(arg1=nil)
+    count = 0
+    if arg1 == nil
+      if block_given?
+        my_each do |k|
+          count += 1 if yield(k) == true
+        end
+      else
+        count length
+      end
+    else
+      my_each do |k|
+        count += 1 if k == arg1
+      end
+    end
+    count
   end
 
   
