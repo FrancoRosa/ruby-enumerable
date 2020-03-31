@@ -1,5 +1,7 @@
 require './scripts.rb'
 
+# rubocop:disable all 
+
 puts '######### all? ############'
 
 print '1: '; puts %w[ant bear cat].all? { |word| word.length >= 3 }

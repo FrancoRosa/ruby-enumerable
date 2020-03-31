@@ -111,7 +111,7 @@ module Enumerable
           count += 1 if yield(k) == true
         end
       else
-        count length
+        count = length
       end
     else
       my_each do |k|
