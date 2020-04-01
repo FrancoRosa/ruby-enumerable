@@ -123,9 +123,15 @@ module Enumerable
     count
   end
 
-  def my_map
-    return to_enum unless block_given?
+  def my_map(*args)
     result = []
+    if args[0].is_a?(Proc)
+      my_each do |k|
+        result << args[0].(k)
+      end
+      return result
+    end
+    return to_enum unless block_given?
     my_each do |k|
       result << yield(k)
     end
@@ -156,4 +162,8 @@ module Enumerable
     end
     mem
   end
+end
+
+def multiply_els(arg)
+  arg.inject(:*)
 end

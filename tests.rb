@@ -81,13 +81,24 @@ print '4: '; puts ary.my_count { |x| x%2==0 }
 puts '######### inject ############'
 
 print '1: '; puts (5..10).inject(:+)
-print '1: '; puts (5..10).inject { |sum, n| sum + n }
-print '1: '; puts (5..10).inject(1, :*)
-print '1: '; puts (5..10).inject(1) { |product, n| product * n }
+print '2: '; puts (5..10).inject { |sum, n| sum + n }
+print '3: '; puts (5..10).inject(1, :*)
+print '4: '; puts (5..10).inject(1) { |product, n| product * n }
 
 puts '######### my_inject ############'
 
 print '1: '; puts (5..10).my_inject(:+)
-print '1: '; puts (5..10).my_inject { |sum, n| sum + n }
-print '1: '; puts (5..10).my_inject(1, :*)
-print '1: '; puts (5..10).my_inject(1) { |product, n| product * n }
+print '2: '; puts (5..10).my_inject { |sum, n| sum + n }
+print '3: '; puts (5..10).my_inject(1, :*)
+print '4: '; puts (5..10).inject(1) { |product, n| product * n }
+
+puts '######### multiply_els ############'
+
+print '1: '; puts multiply_els([2,4,5])
+
+puts '######### my_map_proc ############'
+
+print '1: '; puts [2,4,5].my_map{|k| k+99}.inspect
+
+my_proc = proc { |s| s+99 }
+print '2: '; puts [2,4,5].my_map(my_proc).inspect
