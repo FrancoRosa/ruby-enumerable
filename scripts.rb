@@ -3,10 +3,12 @@ module Enumerable
 
   def my_each
     return to_enum unless block_given?
+    # result
+    ####### compare then make an array
     i = 0
-    while i < length
+    while i < size
       yield self[i]
-      i = i.next
+      i += 1
     end
   end
 
@@ -133,8 +135,8 @@ module Enumerable
   def my_inject(*args)
     mem = 0
     if args[0].is_a?(Numeric)
-      mem = args[0] 
-      each do |k|
+      mem = args[0]
+      my_each do |k|
         mem = yield(mem, k)
       end
     end
