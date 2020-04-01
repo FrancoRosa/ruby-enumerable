@@ -130,14 +130,14 @@ module Enumerable
     result
   end
 
-  def my_inject(*args, &block)
+  def my_inject(*args)
     mem = 0
-    mem = args[0] if args[0]
-    each do |k|
-      mem = yield(mem, k)
+    if args[0].is_a?(Numeric)
+      mem = args[0] 
+      each do |k|
+        mem = yield(mem, k)
+      end
     end
     mem
   end
-
-
 end
