@@ -2,6 +2,7 @@
 module Enumerable
   def my_each
     return to_enum unless block_given?
+
     data = self
     data = data.to_a if is_a?(Range)
     i = 0
@@ -13,6 +14,7 @@ module Enumerable
 
   def my_each_with_index
     return to_enum unless block_given?
+
     i = 0
     while i < length
       yield self[i], i
@@ -22,6 +24,7 @@ module Enumerable
 
   def my_select
     return to_enum unless block_given?
+
     result = []
     my_each do |k|
       result << k if yield(k) == true
@@ -125,6 +128,7 @@ module Enumerable
       return result
     end
     return to_enum unless block_given?
+
     my_each do |k|
       result << yield(k)
     end
