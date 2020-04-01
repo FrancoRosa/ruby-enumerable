@@ -4,8 +4,10 @@ This project contain the assigment on the Project:2 from The Odin Project https:
 
 The implemented methods resemble the ones embeded on the Enumerable Module https://ruby-doc.org/core-2.6/Enumerable.html
 
-The methods are saved on scripts.rb
-The testing rutines are saved on tests.rb
+- The methods are saved on 
+> scripts.rb
+- The testing rutines are saved on 
+> tests.rb
 
 ## Built With
 
