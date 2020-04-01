@@ -1,7 +1,6 @@
 require './scripts.rb'
 
 # rubocop:disable all 
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity 
 
 puts '######### all? ############'
 

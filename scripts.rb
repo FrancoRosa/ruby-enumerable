@@ -1,5 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-
 # Adidional methods for Enumerables
 module Enumerable
   def my_each
