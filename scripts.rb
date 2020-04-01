@@ -3,11 +3,11 @@ module Enumerable
 
   def my_each
     return to_enum unless block_given?
-    # result
-    ####### compare then make an array
+    data = self
+    data = data.to_a if is_a?(Range)
     i = 0
     while i < size
-      yield self[i]
+      yield data[i]
       i += 1
     end
   end
@@ -31,7 +31,7 @@ module Enumerable
   end
 
   def my_all?(arg1=nil)
-    if arg1 == nil
+    if arg1.nil?
       if block_given?
         my_each do |k|
           return false if yield(k) != true
@@ -56,7 +56,7 @@ module Enumerable
   end
 
   def my_any?(arg1=nil)
-    if arg1 == nil
+    if arg1.nil?
       if block_given?
         my_each do |k|
           return true if yield(k) == true
@@ -81,7 +81,7 @@ module Enumerable
   end
 
   def my_none?(arg1=nil)
-    if arg1 == nil
+    if arg1.nil?
       if block_given?
         my_each do |k|
           return false if yield(k) == true
@@ -107,7 +107,7 @@ module Enumerable
 
   def my_count(*arg1)
     count = 0
-    if arg1 == nil
+    if arg1.nil?
       if block_given?
         my_each do |k|
           count += 1 if yield(k) == true
@@ -136,6 +136,20 @@ module Enumerable
     mem = 0
     if args[0].is_a?(Numeric)
       mem = args[0]
+      if !args[1]
+        my_each do |k|
+          mem = yield(mem, k)
+        end
+      else
+        my_each do |k|
+          mem = mem.send(args[1], k)
+        end
+      end
+    elsif args[0].is_a?(Symbol)
+      my_each do |k|
+        mem = mem.send(args[0], k)
+      end
+    elsif args[0].nil?
       my_each do |k|
         mem = yield(mem, k)
       end

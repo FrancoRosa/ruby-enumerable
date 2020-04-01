@@ -80,47 +80,14 @@ print '4: '; puts ary.my_count { |x| x%2==0 }
 
 puts '######### inject ############'
 
-print '1: '; puts (5..10).inject { |sum, n| sum + n }            
-print '2: '; puts (5..10).inject(1) { |product, n| product * n }
-# find the longest word
-longest = %w{ cat sheep bear }.inject do |memo, word|
-   memo.length > word.length ? memo : word
-end
-print '3: '; puts longest
+print '1: '; puts (5..10).inject(:+)
+print '1: '; puts (5..10).inject { |sum, n| sum + n }
+print '1: '; puts (5..10).inject(1, :*)
+print '1: '; puts (5..10).inject(1) { |product, n| product * n }
 
 puts '######### my_inject ############'
 
-print '1: '; puts (5..10).my_inject { |sum, n| sum + n }            
-print '2: '; puts (5..10).my_inject(1) { |product, n| product * n }
-# find the longest word
-longest = %w{ cat sheep bear }.inject do |memo, word|
-  memo.length > word.length ? memo : word
-end
-print '3: '; puts longest
-
-puts "################################"
-# my_inject
-p 'my_inject'
-# # Sum some numbers
-p (5..10).inject(:+) #=> 45
-# # Same using a block and inject
-p (5..10).inject { |sum, n| sum + n } #=> 45
-# # Multiply some numbers
-p (5..10).inject(1, :*) #=> 151200
-# Same using a block
-p (5..10).inject(1) { |product, n| product * n } #=> 151200
-
-puts "################################"
-puts "################################"
-puts "################################"
-a = [1, 5, 2 ,51]
-
-a.each do |k|
-  puts k
-end
-
-puts "################################"
-
-a.my_each do |k|
-  puts k
-end
+print '1: '; puts (5..10).my_inject(:+)
+print '1: '; puts (5..10).my_inject { |sum, n| sum + n }
+print '1: '; puts (5..10).my_inject(1, :*)
+print '1: '; puts (5..10).my_inject(1) { |product, n| product * n }
