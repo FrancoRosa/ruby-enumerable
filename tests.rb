@@ -1,6 +1,7 @@
 require './scripts.rb'
 
 # rubocop:disable all 
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity 
 
 puts '######### all? ############'
 
@@ -99,6 +100,5 @@ print '1: '; puts multiply_els([2,4,5])
 puts '######### my_map_proc ############'
 
 print '1: '; puts [2,4,5].my_map{|k| k+99}.inspect
-
 my_proc = proc { |s| s+99 }
 print '2: '; puts [2,4,5].my_map(my_proc).inspect

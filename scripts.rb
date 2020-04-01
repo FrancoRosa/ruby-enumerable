@@ -1,6 +1,7 @@
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
 # Adidional methods for Enumerables
 module Enumerable
-
   def my_each
     return to_enum unless block_given?
     data = self
@@ -30,7 +31,7 @@ module Enumerable
     result
   end
 
-  def my_all?(arg1=nil)
+  def my_all?(arg1 = nil)
     if arg1.nil?
       if block_given?
         my_each do |k|
@@ -41,21 +42,19 @@ module Enumerable
           return false if k != true
         end
       end
+    elsif arg1.is_a?(Regexp)
+      my_each do |k|
+        return false if k !~ arg1
+      end
     else
-      if arg1.is_a?(Regexp)
-        my_each do |k|
-          return false if !(k =~ arg1)
-        end
-      else
-        my_each do |k|
-          return false if k.is_a?(arg1) != true
-        end
+      my_each do |k|
+        return false if k.is_a?(arg1) != true
       end
     end
     true
   end
 
-  def my_any?(arg1=nil)
+  def my_any?(arg1 = nil)
     if arg1.nil?
       if block_given?
         my_each do |k|
@@ -66,21 +65,19 @@ module Enumerable
           return true if k == true
         end
       end
+    elsif arg1.is_a?(Regexp)
+      my_each do |k|
+        return true if k =~ arg1
+      end
     else
-      if arg1.is_a?(Regexp)
-        my_each do |k|
-          return true if k =~ arg1
-        end
-      else
-        my_each do |k|
-          return true if k.is_a?(arg1) == true
-        end
+      my_each do |k|
+        return true if k.is_a?(arg1) == true
       end
     end
     false
   end
 
-  def my_none?(arg1=nil)
+  def my_none?(arg1 = nil)
     if arg1.nil?
       if block_given?
         my_each do |k|
@@ -91,15 +88,13 @@ module Enumerable
           return false if k == true
         end
       end
+    elsif arg1.is_a?(Regexp)
+      my_each do |k|
+        return false if k =~ arg1
+      end
     else
-      if arg1.is_a?(Regexp)
-        my_each do |k|
-          return false if k =~ arg1
-        end
-      else
-        my_each do |k|
-          return false if k.is_a?(arg1) == true
-        end
+      my_each do |k|
+        return false if k.is_a?(arg1) == true
       end
     end
     true
@@ -127,7 +122,7 @@ module Enumerable
     result = []
     if args[0].is_a?(Proc)
       my_each do |k|
-        result << args[0].(k)
+        result << args[0].call(k)
       end
       return result
     end
