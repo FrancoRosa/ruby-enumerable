@@ -133,9 +133,6 @@ def multiply_els(arg)
   arg.inject(:*)
 end
 
-# rubocop:enable Metrics/BlockNesting
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Metrics/ModuleLength
-# rubocop:enable Style/IfInsideElse
-# rubocop:enable Style/CaseEquality
