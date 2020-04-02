@@ -1,12 +1,8 @@
-# rubocop:disable Metrics/BlockNesting
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Metrics/ModuleLength
-# rubocop:disable Style/IfInsideElse
-# rubocop:disable Style/CaseEquality
 
 # Adidional methods for Enumerables
-
 module Enumerable
   def my_each
     return to_enum unless block_given?
