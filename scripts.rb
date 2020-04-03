@@ -39,7 +39,7 @@ module Enumerable
       if block_given?
         my_each { |k| return false if yield(k) != true }
       else
-        my_each { |k| return false if k.nil? && k != true }
+        my_each { |k| return false if k.nil? or k != true }
       end
     elsif arg1.is_a?(Regexp)
       my_each { |k| return false if k !~ arg1 }
@@ -112,18 +112,19 @@ module Enumerable
   end
 
   def my_inject(*args)
-    mem = to_a.shift
+    arr = to_a
+    mem = arr.shift
     if args[0].is_a?(Numeric)
-      mem = args[0]
+      arr.unshift(args[0])
       if !args[1]
-        my_each { |k| mem = yield(mem, k) }
+        arr.my_each { |k| mem = yield(mem, k) }
       else
-        my_each { |k| mem = mem.send(args[1], k) }
+        arr.my_each { |k| mem = mem.send(args[1], k) }
       end
     elsif args[0].is_a?(Symbol)
-      my_each { |k| mem = mem.send(args[0], k) }
+      arr.my_each { |k| mem = mem.send(args[0], k) }
     elsif args[0].nil?
-      my_each { |k| mem = yield(mem, k) }
+      arr.my_each { |k| mem = yield(mem, k) }
     end
     mem
   end
