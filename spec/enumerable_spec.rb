@@ -213,4 +213,52 @@ RSpec.describe Enumerable do
       expect([1, 2, 4, 2].my_count { |k| (k % 2).zero? }).to eq 3
     end
   end
+
+  describe 'my_map' do
+    context 'when a block is given' do
+      it 'returns an array, the block operations where applied to an array' do
+        expect([1, 2, 7, 4, 5].my_map { |x| x * x }).to eq [1, 4, 49, 16, 25]
+      end
+      it 'returns an array, the block operations where applied to a range' do
+        expect((1..4).my_map { |x| x * x }).to eq [1, 4, 9, 16]
+      end
+    end
+    context 'when a proc is given' do
+      my_proc = proc { |x| x * x }
+      it 'returns an array, the proc operations where applied to an array' do
+        expect([1, 2, 7, 4, 5].my_map(my_proc)).to eq [1, 4, 49, 16, 25]
+      end
+      it 'returns an array, the proc operations where applied to a range' do
+        expect((1..4).my_map(my_proc)).to eq [1, 4, 9, 16]
+      end
+    end
+  end
+
+  describe 'my_inject' do
+    context 'when a block is given' do
+      it 'applies the operation to all elements' do
+        expect((5..10).my_inject { |sum, n| sum + n }).to eq 45
+        expect((5..10).my_inject { |sum, n| sum * n }).to eq 151_200
+      end
+
+      it 'applies the argument as initial value' do
+        expect((5..10).my_inject(5) { |sum, n| sum + n }).to eq 50
+        expect((5..10).my_inject(5) { |sum, n| sum * n }).to eq 756_000
+      end
+    end
+    context 'when a symbol is given' do
+      it 'applies the operator to all elements' do
+        expect((5..10).my_inject(:+)).to eq 45
+        expect((5..10).my_inject(:*)).to eq 151_200
+      end
+      it 'uses the numeric argument as initial value' do
+        expect((5..10).my_inject(2, :+)).to eq 47
+        expect((5..10).my_inject(2, :*)).to eq 302_400
+      end
+    end
+    it 'can receive a proc as input' do
+      search = proc { |memo, word| memo.length > word.length ? memo : word }
+      expect(%w[hello strong am].my_inject(&search)).to eq 'strong'
+    end
+  end
 end
