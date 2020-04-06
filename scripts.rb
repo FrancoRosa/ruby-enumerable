@@ -114,9 +114,10 @@ module Enumerable
 
   def my_inject(*args)
     arr = to_a
-    mem = arr.shift
+    mem = arr[0]
+    arr = arr.drop(1)
     if args[0].is_a?(Numeric)
-      arr.unshift(args[0])
+      arr = [args[0]] + arr
       if !args[1]
         arr.my_each { |k| mem = yield(mem, k) }
       else
