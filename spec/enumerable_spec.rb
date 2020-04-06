@@ -88,7 +88,7 @@ RSpec.describe Enumerable do
       it 'returns true when all elements satisfy the block condition' do
         expect(test_array_1.my_all? { |number| number <= 56 }).to be true
       end
-    end      
+    end
 
     context 'when an argument is given' do
       context 'when the argument is a RegExp' do
@@ -117,6 +117,100 @@ RSpec.describe Enumerable do
       it 'returns true when all elements are not false or nil' do
         expect([1, 1.3, 2i, 4].my_all?).to be true
       end
+    end
+  end
+  
+  describe 'my_any?' do
+    context 'when a block is given' do
+      it 'returns true when an element satisfies the block condition' do
+        expect(test_array_1.my_any? { |number| number < 56 }).to be true
+      end
+      it 'returns false when no elements satisfy the block condition' do
+        expect(test_array_1.my_any? { |number| number > 56 }).to be false
+      end
+    end
+
+    context 'when an argument is given' do
+      context 'when the argument is a RegExp' do
+        it 'returns true when an element matches the RegExp' do
+          expect(%w[ant bear cat].my_any?(/t/)).to be true
+        end
+        it 'returns false when no element matches the RegExp' do
+          expect(%w[ant goat cat].my_any?(/h/)).to be false
+        end
+      end
+      context 'when the argument is a Class' do
+        it 'returns false when an element does not belong the Class' do
+          expect([1, false, 3.1, nil].my_any?(String)).to be false
+        end
+        it 'returns true when all elements belong the Class' do
+          expect([1, 'Ok', 2i, 4].my_any?(Numeric)).to be true
+        end
+      end
+    end
+
+    context 'when no argument or block is given' do
+      it 'returns true when at least one element is false or nil' do
+        expect([nil, nil, nil, 'x'].my_any?).to be true
+        expect([1, false, 'y', 'x'].my_any?).to be true
+      end
+      it 'returns false when all elements are false or nil' do
+        expect([false, nil, nil].my_any?).to be false
+      end
+    end
+  end
+
+  describe 'my_none?' do
+    context 'when a block is given' do
+      it 'returns false when an element satisfies the block condition' do
+        expect(test_array_1.my_none? { |number| number < 56 }).to be false
+      end
+      it 'returns true when no elements satisfy the block condition' do
+        expect(test_array_1.my_none? { |number| number > 56 }).to be true
+      end
+    end
+
+    context 'when an argument is given' do
+      context 'when the argument is a RegExp' do
+        it 'returns false when an element matches the RegExp' do
+          expect(%w[ant bear cat].my_none?(/t/)).to be false
+        end
+        it 'returns true when no element matches the RegExp' do
+          expect(%w[ant goat cat].my_none?(/h/)).to be true
+        end
+      end
+      context 'when the argument is a Class' do
+        it 'returns false when an element belongs the Class' do
+          expect([1, false, '3.1', nil].my_none?(String)).to be false
+        end
+        it 'returns true when none of the elements belong the Class' do
+          expect([1, 25, 2i, 4].my_none?(String)).to be true
+        end
+      end
+    end
+
+    context 'when no argument or block is given' do
+      it 'returns false when at least one element is false or nil' do
+        expect([nil, nil, nil, 'x'].my_none?).to be false
+        expect([1, false, 'y', 'x'].my_none?).to be false
+      end
+      it 'returns true when one of the elements are false or nil' do
+        expect([false, nil, nil].my_none?).to be true
+      end
+    end
+  end
+
+  describe 'my_count' do
+    it 'returns the number of elements equals to the argument' do
+      expect([1, 2, 4, 2].my_count(2)).to eq 2
+      expect([1, 2, 4, 2].my_count(9)).to eq 0
+    end
+    it 'returns the number of elements if no argument provided' do
+      expect([1, 2, 4, 2].my_count).to eq 4
+      expect([1, 2, 4, [2, 1]].my_count).to eq 4
+    end
+    it 'returns the number of elements that satisfies the block condition' do
+      expect([1, 2, 4, 2].my_count { |k| (k % 2).zero? }).to eq 3
     end
   end
 end

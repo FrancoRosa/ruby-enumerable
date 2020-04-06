@@ -57,7 +57,7 @@ module Enumerable
       if block_given?
         my_each { |k| return true if yield(k) == true }
       else
-        my_each { |k| return true if k == true }
+        my_each { |k| return true if k }
       end
     elsif arg1.is_a?(Regexp)
       my_each { |k| return true if k =~ arg1 }
@@ -74,7 +74,7 @@ module Enumerable
       if block_given?
         my_each { |k| return false if yield(k) == true }
       else
-        my_each { |k| return false if k == true }
+        my_each { |k| return false if k }
       end
     elsif arg1.is_a?(Regexp)
       my_each { |k| return false if k =~ arg1 }
