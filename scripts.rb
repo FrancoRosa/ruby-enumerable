@@ -5,7 +5,7 @@
 # Adidional methods for Enumerables
 module Enumerable
   def my_each
-    return to_enum unless block_given?
+    return self.to_enum unless block_given?
 
     data = self
     data = data.to_a if is_a?(Range)
