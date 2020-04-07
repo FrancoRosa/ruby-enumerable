@@ -20,9 +20,11 @@ module Enumerable
   def my_each_with_index
     return to_enum unless block_given?
 
+    data = self
+    data = data.to_a if is_a?(Range)
     i = 0
-    while i < length
-      yield self[i], i
+    while i < size
+      yield data[i], i
       i = i.next
     end
   end

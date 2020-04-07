@@ -1,13 +1,11 @@
 # ruby-enumerable
 
-This project contain the assigment on the Project:2 from The Odin Project https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks.
+This project contain the assigment on the Project:2 from [The Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks)
 
-The implemented methods resemble the ones embeded on the Enumerable Module https://ruby-doc.org/core-2.6/Enumerable.html
+The implemented methods resemble the ones embeded on the [Enumerable Module](https://ruby-doc.org/core-2.6/Enumerable.html)
 
-- The methods are saved on 
-> scripts.rb
-- The testing rutines are saved on 
-> tests.rb
+- The methods are saved on: ```scripts.rb```
+- The testing rutines are saved on: ```spec/enumerable_spec.rb```
 
 ## Built With
 
@@ -15,16 +13,30 @@ The implemented methods resemble the ones embeded on the Enumerable Module https
 - Rubocop (linter)
 
 ### Prerequisites
+
 - To run this project, you must have Ruby installed in your computer.
 
+- To test the methods you can install **RSpec**
+
+  ```
+   gem install rspec
+  ```
+
 ### Setup
+
 - Clone this repository to your local machine or download the files.
 
 ### Usage
-- Navigate to the project folder and run the main.tb file, using: ruby main.rb
-- To run the methods created here, you must call them from main.rb or create a new file with its purpose.
 
-## Authors
+- Navigate to the project folder and run the main.rb file, using: ```ruby scripts.rb```
+- To run the methods created here, you must call them from ```scripts.rb``` or create a new file with its purpose.
+- To test the methods created here, you can use the following command.
+
+   ```
+   rspec --format documentation
+   ```
+
+## Author
 
 👤 **Franco Rosa**
 
