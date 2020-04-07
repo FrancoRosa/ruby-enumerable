@@ -7,7 +7,7 @@ RSpec.describe Enumerable do
   describe '#my_each' do
     context 'when a block is given' do
       it 'concatenates the elements of the input' do
-        expect {test_array_2.my_each { |k| print k }}.to output('abcde').to_stdout
+        expect { test_array_2.my_each { |k| print k } }.to output('abcde').to_stdout
       end
       it 'loops trough an array' do
         r_each = []
@@ -59,7 +59,7 @@ RSpec.describe Enumerable do
         expect(actual).to eq expected
       end
     end
-    context "when a block is not given" do
+    context 'when a block is not given' do
       it 'returns a Enumerator' do
         expect(test_range_1.my_each).to be_a(Enumerator)
         expect(test_range_1.my_each.to_a).to eq test_range_1.to_a
@@ -119,7 +119,7 @@ RSpec.describe Enumerable do
       end
     end
   end
-  
+
   describe 'my_any?' do
     context 'when a block is given' do
       it 'returns true when an element satisfies the block condition' do
